@@ -4,6 +4,8 @@ Author: https://twitter.com/webby_the_dev
 
 Discord: https://discord.gg/grmQhZBwWP
 
+Live version: [https://friendtech-terminal.vercel.app/](https://friendtech-terminal.vercel.app/)
+
 ## Screenshot
 
 <img src="screenshot.png" width="765" height="350">
@@ -13,8 +15,6 @@ Discord: https://discord.gg/grmQhZBwWP
 Project was made in few hours because of the friend.tech hype. That is why its code quality isn't the best.
 
 I just wanted to quickly make a simple terminal for getting recent users, buying and selling their keys and fetching some users data.
-
-You can see it live here: [Link](https://friendtech-terminal.vercel.app/)
 
 ### Tech stack and libs:
 
