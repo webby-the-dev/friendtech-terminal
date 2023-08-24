@@ -1,8 +1,12 @@
 # Friend.tech Terminal
 
-Made by https://twitter.com/webby_the_dev
+Author: https://twitter.com/webby_the_dev
 
-Join my discord for more details: https://discord.gg/grmQhZBwWP
+Discord: https://discord.gg/grmQhZBwWP
+
+## Screenshot
+
+<img src="screenshot.png" width="765" height="350">
 
 ## Overview
 
