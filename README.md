@@ -4,7 +4,7 @@ Author: https://twitter.com/webby_the_dev
 
 Discord: https://discord.gg/grmQhZBwWP
 
-Live version: [https://friendtech-terminal.vercel.app/](https://friendtech-terminal.vercel.app/)
+Live version: [https://friendtech-terminal.com/](https://friendtech-terminal.com/)
 
 Stars highly appreciated ⭐️⭐️⭐️
 
