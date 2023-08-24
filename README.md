@@ -6,7 +6,7 @@ Join my discord for more details: https://discord.gg/grmQhZBwWP
 
 ## Overview
 
-Project was made in few hours beacuse of the friend.tech hype. That is why its code quality isn't the best.
+Project was made in few hours because of the friend.tech hype. That is why its code quality isn't the best.
 
 I just wanted to quickly make a simple terminal for getting recent users, buying and selling their keys and fetching some users data.
 
