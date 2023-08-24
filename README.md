@@ -10,6 +10,8 @@ Project was made in few hours beacuse of the friend.tech hype. That is why its c
 
 I just wanted to quickly make a simple terminal for getting recent users, buying and selling their keys and fetching some users data.
 
+You can see it live here: [Link](friendtech-terminal.vercel.app)
+
 ### Tech stack and libs:
 
 - [Next.js](https://nextjs.org/)
