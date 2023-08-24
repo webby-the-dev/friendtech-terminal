@@ -13,6 +13,7 @@ import {
   Flex,
   Grid,
   Input,
+  Link,
   Spinner,
   Stack,
   Text,
@@ -23,6 +24,7 @@ import { ethers } from "ethers";
 import { debounce, uniqBy } from "lodash";
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
+import { BsDiscord, BsGithub } from "react-icons/bs";
 
 let cancelToken: CancelTokenSource | undefined;
 
@@ -243,6 +245,42 @@ export default function Home() {
 
   return (
     <Grid gap={4}>
+      <Flex gap={4} alignItems="center" justifyContent="center" py={4}>
+        <Flex alignItems="center" gap={1} color="#fff">
+          <Text fontSize="md">Open source repo:</Text>
+          <BsGithub />
+          <Link
+            textDecoration="underline"
+            href="https://github.com/webby-the-dev/friendtech-terminal"
+            target="_blank"
+          >
+            Link
+          </Link>
+        </Flex>
+        <Flex alignItems="center" gap={1} color="#fff">
+          <Text fontSize="md">Author:</Text>
+          <BsGithub />
+          <Link
+            textDecoration="underline"
+            href="https://github.com/webby-the-dev"
+            target="_blank"
+          >
+            Webby-the-dev
+          </Link>
+        </Flex>
+
+        <Flex alignItems="center" gap={1} color="#fff">
+          <BsDiscord />
+          <Text fontSize="md">Discord:</Text>
+          <Link
+            textDecoration="underline"
+            href="https://discord.gg/grmQhZBwWP"
+            target="_blank"
+          >
+            Link
+          </Link>
+        </Flex>
+      </Flex>
       <Flex gap={4}>
         <Grid gap={2} flex={1}>
           <Grid>
@@ -256,24 +294,23 @@ export default function Home() {
               setSearchString={setSearchString}
             />
           </Grid>
-
+          <Flex
+            justifyContent="center"
+            gap={2}
+            my={filteredUsers.length === 0 ? 8 : 0}
+          >
+            <Text fontStyle="italic" color="yellow.500">
+              Watching for new users
+            </Text>
+            <Spinner color="yellow.500" />
+          </Flex>
           <Grid
             gap={2}
-            h="calc(100vh - 154px - 8px)"
+            h="calc(100vh - 202px - 8px - 120px)"
             overflowY="scroll"
             className="scrollable-container"
           >
             <Stack>
-              <Flex
-                justifyContent="center"
-                gap={2}
-                my={filteredUsers.length === 0 ? 8 : 0}
-              >
-                <Text fontStyle="italic" color="yellow.500">
-                  Watching for new users
-                </Text>
-                <Spinner color="yellow.500" />
-              </Flex>
               {filteredUsers.map((user, idx) => (
                 <UserBox
                   privateKey={privateKey}
@@ -361,7 +398,7 @@ export default function Home() {
             </Grid>
             <Grid
               gap={2}
-              h="calc(100vh - 85px)"
+              h="calc(100vh - 101px - 56px)"
               overflowY="scroll"
               className="scrollable-container"
             >
@@ -388,25 +425,19 @@ export default function Home() {
             </Grid>
           </Stack>
         </Grid>
-        <Flex
-          p={2}
-          position="fixed"
-          bottom={0}
-          gap={2}
-          width="100%"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Text>Private key</Text>
-          <Input
-            size="sm"
-            value={privateKey}
-            onChange={(e) => setPrivateKey(e.target.value)}
-            maxW="300px"
-            type="password"
-          />
-          <Button onClick={() => handleSavePrivateKeyLocally()}>Save</Button>
-        </Flex>
+        <Grid p={2} position="fixed" bottom={0} gap={2} width="100%">
+          <Flex gap={2} alignItems="center" justifyContent="center">
+            <Text>Private key</Text>
+            <Input
+              size="sm"
+              value={privateKey}
+              onChange={(e) => setPrivateKey(e.target.value)}
+              maxW="300px"
+              type="password"
+            />
+            <Button onClick={() => handleSavePrivateKeyLocally()}>Save</Button>
+          </Flex>
+        </Grid>
       </Flex>
     </Grid>
   );
