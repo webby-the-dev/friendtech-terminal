@@ -6,6 +6,10 @@ Discord: https://discord.gg/grmQhZBwWP
 
 Live version: [https://friendtech-terminal.vercel.app/](https://friendtech-terminal.vercel.app/)
 
+Stars highly appreciated ⭐️⭐️⭐️
+
+My friend.tech [link](https://www.friend.tech/rooms/0xFe0a69518CaE0174BF52481545A5c547DD3f252C)
+
 ## Screenshot
 
 <img src="screenshot.png" width="765" height="350">

@@ -24,7 +24,8 @@ import { ethers } from "ethers";
 import { debounce, uniqBy } from "lodash";
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
-import { BsDiscord, BsGithub } from "react-icons/bs";
+import { BsDiscord, BsGithub, BsTwitter } from "react-icons/bs";
+import { FaUserFriends } from "react-icons/fa";
 
 let cancelToken: CancelTokenSource | undefined;
 
@@ -247,37 +248,46 @@ export default function Home() {
     <Grid gap={4}>
       <Flex gap={4} alignItems="center" justifyContent="center" py={4}>
         <Flex alignItems="center" gap={1} color="#fff">
-          <Text fontSize="md">Open source repo:</Text>
           <BsGithub />
           <Link
             textDecoration="underline"
             href="https://github.com/webby-the-dev/friendtech-terminal"
             target="_blank"
           >
-            Link
+            Open source
           </Link>
         </Flex>
+
         <Flex alignItems="center" gap={1} color="#fff">
-          <Text fontSize="md">Author:</Text>
-          <BsGithub />
+          <BsTwitter />
           <Link
             textDecoration="underline"
-            href="https://github.com/webby-the-dev"
+            href="https://twitter.com/webby_the_dev"
             target="_blank"
           >
-            Webby-the-dev
+            Author
+          </Link>
+        </Flex>
+
+        <Flex alignItems="center" gap={1} color="#fff">
+          <FaUserFriends />
+          <Link
+            textDecoration="underline"
+            href="https://www.friend.tech/rooms/0xFe0a69518CaE0174BF52481545A5c547DD3f252C"
+            target="_blank"
+          >
+            My friend.tech
           </Link>
         </Flex>
 
         <Flex alignItems="center" gap={1} color="#fff">
           <BsDiscord />
-          <Text fontSize="md">Discord:</Text>
           <Link
             textDecoration="underline"
             href="https://discord.gg/grmQhZBwWP"
             target="_blank"
           >
-            Link
+            Discord
           </Link>
         </Flex>
       </Flex>
