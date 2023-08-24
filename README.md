@@ -58,7 +58,7 @@ I just wanted to quickly make a simple terminal for getting recent users, buying
 
 1. Clone the repository.
 2. Run `npm install` to install the dependencies.
-3. Set up the necessary environment variables.
+3. Set up the necessary environment variables by creating `.env.local` file in root folder, copy pasting `.example.env` file content to it and filling all of the variables.
 4. Launch the application with `npm run dev`
 
 ## License
