@@ -146,7 +146,7 @@ export default function Home() {
     await sellShares(address, numOfShares, toast, getUserShares);
   };
 
-  const searchUsers = async (string: string) => {
+  const searchUsersByTwitterName = async (string: string) => {
     if (typeof cancelToken != typeof undefined) {
       cancelToken!.cancel("Operation canceled due to new request.");
     }
@@ -155,7 +155,22 @@ export default function Home() {
 
     return axios
       .get("/api/searchUsers", {
-        params: { username: string },
+        params: { twitterUsername: string },
+        cancelToken: cancelToken.token,
+      })
+      .then((res) => res.data);
+  };
+
+  const searchUsersByAddress = async (string: string) => {
+    if (typeof cancelToken != typeof undefined) {
+      cancelToken!.cancel("Operation canceled due to new request.");
+    }
+
+    cancelToken = axios.CancelToken.source();
+
+    return axios
+      .get("/api/searchUsers", {
+        params: { address: string },
         cancelToken: cancelToken.token,
       })
       .then((res) => res.data);
@@ -164,8 +179,14 @@ export default function Home() {
   const debouncedSearch = debounce(async (string: string) => {
     if (!string) return;
     try {
-      const data = await searchUsers(string);
-      setSearchedUsers(data);
+      if (string.toLowerCase().startsWith("0x")) {
+        const data = await searchUsersByAddress(string);
+        setSearchedUsers([data]);
+      } else {
+        const data = await searchUsersByTwitterName(string);
+        console.log("dadsad", data);
+        setSearchedUsers(data);
+      }
     } catch (err) {
       if (axios.isCancel(err)) {
         console.log("Request canceled", err.message);

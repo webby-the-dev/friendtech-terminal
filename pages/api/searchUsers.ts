@@ -29,17 +29,32 @@ export default async function handler(
 ) {
   await runMiddleware(req, res, cors);
 
+  const { twitterUsername, address } = req.query;
+
   try {
-    const data = await axios.get(
-      apiUrl + `search/users?username=${req.query.username}`,
-      {
+    if (twitterUsername) {
+      const data = await axios.get(
+        apiUrl + `search/users?username=${twitterUsername}`,
+        {
+          headers: {
+            Authorization:
+              process.env.NEXT_PUBLIC_FRIEND_TECH_AUTHORIZATION_TOKEN,
+          },
+        }
+      );
+      res.json(data.data.users);
+    }
+
+    if (address) {
+      console.log(apiUrl + `users/${address}`);
+      const data = await axios.get(apiUrl + `users/${address}`, {
         headers: {
           Authorization:
             process.env.NEXT_PUBLIC_FRIEND_TECH_AUTHORIZATION_TOKEN,
         },
-      }
-    );
-    res.json(data.data.users);
+      });
+      res.json(data.data);
+    }
   } catch (e) {
     res.json(e);
   }
