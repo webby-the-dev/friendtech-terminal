@@ -376,7 +376,7 @@ export default function Home() {
             ))}
           </Stack>
         </Grid>
-        <Grid gap={2} flex={0.5}>
+        <Grid gap={2} flex={1}>
           <Stack p={2}>
             <Grid gap={2}>
               <Text textAlign="center">Search user</Text>
