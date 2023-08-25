@@ -71,14 +71,10 @@ export const sellShares = async (
   callback: any
 ) => {
   const qty = BigInt(sharesToSell);
-  const sellPrice = await contractWithSigner!.getSellPriceAfterFee(
-    subjectAddress,
-    qty
-  );
 
   try {
     const tx = await contractWithSigner!.sellShares(subjectAddress, qty, {
-      value: sellPrice,
+      value: 0,
     });
     const receipt = await tx.wait();
     console.log(`Transaction successful with hash: ${receipt.hash}`);
