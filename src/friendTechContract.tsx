@@ -40,15 +40,16 @@ export const buyShares = async (
     });
     const receipt = await tx.wait();
     console.log(`Transaction successful with hash: ${receipt.hash}`);
-    toast({
-      title: "Success",
-      description: "Succesfully bought shares",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
+
     setTimeout(() => {
       callback();
+      toast({
+        title: "Success",
+        description: "Succesfully bought shares",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
     }, 5000);
   } catch (err) {
     if (err instanceof Error) {
@@ -78,15 +79,16 @@ export const sellShares = async (
     });
     const receipt = await tx.wait();
     console.log(`Transaction successful with hash: ${receipt.hash}`);
-    toast({
-      title: "Success",
-      description: "Succesfully sold shares",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
+
     setTimeout(() => {
       callback();
+      toast({
+        title: "Success",
+        description: "Succesfully sold shares",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
     }, 5000);
   } catch (err) {
     if (err instanceof Error) {
