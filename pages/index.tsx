@@ -418,9 +418,17 @@ export default function Home() {
             </Grid>
           </Stack>
         </Grid>
-        <Grid p={2} position="fixed" bottom={0} gap={2} width="100%">
+        <Grid
+          p={2}
+          position="fixed"
+          bottom={0}
+          gap={2}
+          width="100%"
+          justifyContent="center"
+        >
           <Flex gap={2} alignItems="center" justifyContent="center">
             <Text>Private key</Text>
+
             <Input
               size="sm"
               value={privateKey}
@@ -428,8 +436,23 @@ export default function Home() {
               maxW="300px"
               type="password"
             />
-            <Button onClick={() => handleSavePrivateKeyLocally()}>Save</Button>
+            <Button size="sm" onClick={() => handleSavePrivateKeyLocally()}>
+              Save
+            </Button>
           </Flex>
+          <Text textAlign="center" color="yellow.500" fontWeight={600}>
+            The code is{" "}
+            <Link
+              textDecoration="underline"
+              href="https://github.com/webby-the-dev/friendtech-terminal"
+              target="_blank"
+            >
+              open-source
+            </Link>
+            , which proves we <span style={{ color: "red" }}>DO NOT</span> store
+            your private key anywhere. <br /> It is stored only locally in your
+            browser and is cleared every time you refresh the page.
+          </Text>
         </Grid>
       </Flex>
     </Grid>
