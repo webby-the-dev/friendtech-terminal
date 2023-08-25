@@ -50,7 +50,7 @@ I just wanted to quickly make a simple terminal for getting recent users, buying
 
 `NEXT_PUBLIC_FRIEND_TECH_AUTHORIZATION_TOKEN=`: friend.tech token for authorization of `search/users?username=` endpoint
 
-`NEXT_PUBLIC_TWITTER_API_BEARER=`: twitter api bearer for fetching twitter users followers count
+`NEXT_PUBLIC_BACKEND_URL=`: url for backend responsible for fetching last users
 
 `NEXT_PUBLIC_WEBSOCKET_PROVIDER=`: Base network websocket provider
 
