@@ -51,6 +51,15 @@ export const buyShares = async (
       callback();
     }, 5000);
   } catch (err) {
+    if (err instanceof Error) {
+      toast({
+        title: "Error",
+        description: `Failed to buy shares for ${subjectAddress}: ${err.message}`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
     console.error(`Failed to buy shares for ${subjectAddress}`, err);
   }
 };
@@ -84,6 +93,15 @@ export const sellShares = async (
       callback();
     }, 5000);
   } catch (err) {
-    console.error(`Failed to buy shares for ${subjectAddress}`, err);
+    if (err instanceof Error) {
+      toast({
+        title: "Error",
+        description: `Failed to sell shares for ${subjectAddress}: ${err.message}`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+    console.error(`Failed to sell shares for ${subjectAddress}`, err);
   }
 };
