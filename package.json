@@ -1,9 +1,9 @@
 {
   "name": "friendtech-terminal",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 8080",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -30,6 +30,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
+    "socket.io-client": "^4.7.2",
     "typescript": "5.1.6"
   },
   "license": "GNU AFFERO GPLV3"

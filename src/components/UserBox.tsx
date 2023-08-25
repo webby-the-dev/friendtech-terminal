@@ -59,7 +59,7 @@ export const UserBox = (props: UserBoxProps) => {
         )}
         {user.foundAt && (
           <Text ml="auto" mr={0}>
-            {user.foundAt.format("HH:mm:ss")} {user.foundAt.fromNow()}
+            {user.foundAt.format("HH:mm:ss")}
           </Text>
         )}
       </Flex>

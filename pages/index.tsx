@@ -2,12 +2,11 @@ import { Filters } from "@/src/components/Filters";
 import { UserBox } from "@/src/components/UserBox";
 import {
   buyShares,
-  contract,
   sellShares,
   setupContract,
   setupWallet,
 } from "@/src/friendTechContract";
-import { FilterType, TwitterUserResponse, User } from "@/src/types";
+import { FilterType, User } from "@/src/types";
 import {
   Button,
   Flex,
@@ -20,12 +19,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios, { CancelTokenSource } from "axios";
-import { ethers } from "ethers";
 import { debounce, uniqBy } from "lodash";
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import { BsDiscord, BsGithub, BsTwitter } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";
+import { io } from "socket.io-client";
 
 let cancelToken: CancelTokenSource | undefined;
 
@@ -45,82 +44,43 @@ export default function Home() {
   const toast = useToast();
 
   useEffect(() => {
-    let eventQueue: any[] = [];
+    const URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-    const processEvent = async (event: any) => {
-      try {
-        await axios
-          .get(`https://prod-api.kosetto.com/users/${event.traderAddress}`)
-          .then((data) => {
-            setUsers((prev) => [{ ...data.data, foundAt: moment() }, ...prev]);
-            axios
-              .get<TwitterUserResponse>(`/api/getTwitterFollowers`, {
-                params: { profileName: data.data.twitterUsername },
-              })
-              .then((followersData) => {
-                setUsers((prev) => {
-                  const newUsers = [...prev];
-                  const user = newUsers.find(
-                    (user) => user.twitterUsername === data.data.twitterUsername
-                  );
-                  if (user) {
-                    user.followers = followersData.data.followers_count;
-                  }
-                  return newUsers;
-                });
-              });
-          });
-      } catch (err) {
-        console.log(err);
+    if (!URL) {
+      alert(
+        "No backend URL provided! Please set the NEXT_PUBLIC_BACKEND_URL environment variable in .env file"
+      );
+      return;
+    }
+
+    const socket = io(URL);
+
+    socket.on("connect", () => {
+      console.log("Connected to the WebSocket server");
+    });
+
+    socket.on("newUser", async (data) => {
+      setUsers((prev) => [{ ...data, foundAt: moment() }, ...prev]);
+    });
+
+    socket.on("error", (error) => {
+      console.error("WebSocket error:", error);
+    });
+
+    socket.on("close", (event) => {
+      if (event.wasClean) {
+        console.log(
+          `Closed cleanly, code=${event.code}, reason=${event.reason}`
+        );
+      } else {
+        console.error("Connection died");
       }
-      checkQueue();
+    });
+
+    return () => {
+      socket.disconnect();
+      socket.off();
     };
-
-    const checkQueue = async () => {
-      if (eventQueue.length > 0) {
-        eventQueue = uniqBy(eventQueue, "traderAddress");
-        const nextEvent = eventQueue.shift();
-        await processEvent(nextEvent);
-      }
-    };
-
-    contract.on(
-      "Trade",
-      async (
-        trader,
-        subject,
-        isBuy,
-        shareAmount,
-        ethAmount,
-        protocolEthAmount,
-        subjectEthAmount,
-        supply
-      ) => {
-        const basicTradeDetails = {
-          traderAddress: trader,
-          subjectAddress: subject,
-          isBuy: isBuy ? "Buy" : "Sell",
-          shareAmount,
-          ethAmount: ethers.formatEther(ethAmount),
-          protocolEthAmount: ethers.formatEther(protocolEthAmount),
-          subjectEthAmount: ethers.formatEther(subjectEthAmount),
-          supply,
-        };
-
-        if (
-          basicTradeDetails.traderAddress ===
-            basicTradeDetails.subjectAddress &&
-          basicTradeDetails.isBuy === "Buy" &&
-          basicTradeDetails.ethAmount === "0.0" &&
-          basicTradeDetails.shareAmount === 1n &&
-          basicTradeDetails.supply === 1n
-        ) {
-          eventQueue.push({ ...basicTradeDetails });
-
-          checkQueue();
-        }
-      }
-    );
   }, []);
 
   useEffect(() => {
@@ -224,8 +184,9 @@ export default function Home() {
     [key in FilterType]: (user: User) => boolean;
   } = {
     all: () => true,
-    "5k": (user: User) => user.followers >= 5000 && user.followers < 10000,
-    "10k": (user: User) => user.followers >= 10000,
+    "5k": (user: User) =>
+      user.followers ? user.followers >= 5000 && user.followers < 10000 : false,
+    "10k": (user: User) => (user.followers ? user.followers >= 10000 : false),
   };
 
   const filteredUsers = uniqBy(
@@ -308,6 +269,7 @@ export default function Home() {
             justifyContent="center"
             gap={2}
             my={filteredUsers.length === 0 ? 8 : 0}
+            alignItems="center"
           >
             <Text fontStyle="italic" color="yellow.500">
               Watching for new users
@@ -356,7 +318,7 @@ export default function Home() {
                   ...selectedUserData,
                   followers:
                     users.find((u) => u.address === selectedUserData.address)
-                      ?.followers ?? 0,
+                      ?.followers ?? undefined,
                 }}
                 realTime
                 selectUserAddress={setSelectedUserAddress}

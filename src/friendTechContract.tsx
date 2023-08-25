@@ -1,9 +1,10 @@
 import { ethers } from "ethers";
 import { contractABI } from "./contractABI";
 
-const url = process.env.NEXT_PUBLIC_WEBSOCKET_PROVIDER;
+const baseNetworkWebsocketUrl = process.env.NEXT_PUBLIC_WEBSOCKET_PROVIDER;
 const contractAddress = "0xCF205808Ed36593aa40a44F10c7f7C2F67d4A4d4";
-const provider = new ethers.WebSocketProvider(url!);
+
+const provider = new ethers.WebSocketProvider(baseNetworkWebsocketUrl!);
 
 export const contract = new ethers.Contract(
   contractAddress,
