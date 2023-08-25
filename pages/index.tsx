@@ -112,7 +112,7 @@ export default function Home() {
 
       fetchInterval = setInterval(() => {
         fetchSelectedUserData();
-      }, 3000);
+      }, 1000);
     }
 
     return () => clearInterval(fetchInterval);
