@@ -27,6 +27,7 @@ import { FaUserFriends } from "react-icons/fa";
 import { io } from "socket.io-client";
 
 let cancelToken: CancelTokenSource | undefined;
+let getUserLiveDateInterval;
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
@@ -106,16 +107,16 @@ export default function Home() {
   };
 
   useEffect(() => {
-    let fetchInterval: NodeJS.Timeout;
     if (selectedUserAddress) {
+      clearInterval(getUserLiveDateInterval!);
       fetchSelectedUserData();
 
-      fetchInterval = setInterval(() => {
+      getUserLiveDateInterval = setInterval(() => {
         fetchSelectedUserData();
-      }, 1000);
+      }, 10000);
     }
 
-    return () => clearInterval(fetchInterval);
+    return () => clearInterval(getUserLiveDateInterval!);
   }, [selectedUserAddress]);
 
   const getUserShares = () =>

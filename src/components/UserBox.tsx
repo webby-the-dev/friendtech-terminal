@@ -1,4 +1,4 @@
-import { Grid, Flex, Button, Image, Text, Link, Box } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Image, Link, Text } from "@chakra-ui/react";
 import { User } from "../types";
 
 interface UserBoxProps {
@@ -125,7 +125,7 @@ export const UserBox = (props: UserBoxProps) => {
       {!isDetails && (
         <Box ml="auto" mr={0}>
           <Button size="sm" onClick={() => selectUserAddress(user.address)}>
-            Details
+            Show real time
           </Button>
         </Box>
       )}
