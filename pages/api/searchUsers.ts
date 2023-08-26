@@ -37,7 +37,7 @@ export default async function handler(
         apiUrl + `search/users?username=${twitterUsername}`,
         {
           headers: {
-            Authorization:
+            authorization:
               process.env.NEXT_PUBLIC_FRIEND_TECH_AUTHORIZATION_TOKEN,
           },
         }
@@ -49,7 +49,7 @@ export default async function handler(
       console.log(apiUrl + `users/${address}`);
       const data = await axios.get(apiUrl + `users/${address}`, {
         headers: {
-          Authorization:
+          authorization:
             process.env.NEXT_PUBLIC_FRIEND_TECH_AUTHORIZATION_TOKEN,
         },
       });
