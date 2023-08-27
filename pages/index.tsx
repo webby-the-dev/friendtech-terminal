@@ -182,11 +182,14 @@ export default function Home() {
     try {
       if (string.toLowerCase().startsWith("0x")) {
         const data = await searchUsersByAddress(string);
-        setSearchedUsers([data]);
+        if (data.adress) {
+          setSearchedUsers([data]);
+        }
       } else {
         const data = await searchUsersByTwitterName(string);
-        console.log("dadsad", data);
-        setSearchedUsers(data);
+        if (data.adress) {
+          setSearchedUsers([data]);
+        }
       }
     } catch (err) {
       if (axios.isCancel(err)) {
