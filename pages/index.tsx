@@ -182,12 +182,12 @@ export default function Home() {
     try {
       if (string.toLowerCase().startsWith("0x")) {
         const data = await searchUsersByAddress(string);
-        if (data.adress) {
+        if (data.address) {
           setSearchedUsers([data]);
         }
       } else {
         const data = await searchUsersByTwitterName(string);
-        if (data.adress) {
+        if (data.address) {
           setSearchedUsers([data]);
         }
       }
