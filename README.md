@@ -56,6 +56,9 @@ I just wanted to quickly make a simple terminal for getting recent users, buying
 
 ## Running locally
 
+@Update ‼️ - Because of all friend.tech API changes I had to move whole backend to separated project so it is not possible to set everything up locally anymore.
+I give backend code for all of my friend.tech key holders that you can get here [link](https://www.friend.tech/rooms/0xFe0a69518CaE0174BF52481545A5c547DD3f252C). 
+
 1. Clone the repository.
 2. Run `npm install` to install the dependencies.
 3. Set up the necessary environment variables by creating `.env.local` file in root folder, copy pasting `.example.env` file content to it and filling all of the variables.
