@@ -1,5 +1,9 @@
 # Friend.tech Terminal
 
+## ❗️Update 
+#### I stopped working on the terminal after a lot of API changes which caused a lot of issues. It does not work anymore. I started working on telegram bots and snipers, join my discord or DM me on twitter for access.
+##
+
 Author: https://twitter.com/webby_the_dev
 
 Discord: https://discord.gg/grmQhZBwWP
